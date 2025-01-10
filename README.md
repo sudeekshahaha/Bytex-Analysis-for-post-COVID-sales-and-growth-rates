@@ -159,14 +159,17 @@ Regional Growth Strategies
 - **Refund Records**: No refunds were recorded for 2022, which is an anomaly warranting further examination.
 - **Deterministic Relationship in Data**: Each `marketing_channel` is uniquely linked to one `account_creation_method`, indicating a one-to-one mapping. This lack of variation may require attention from the data engineering team to confirm intended relationships.
     - ![One to One Mapping](Data/visualizations/order_count_channelxmethod.webp)
+      
 - **Loyalty Program Clarification**:
     - Ambiguity exists in the `loyalty_program` variable—it's unclear if it's tied to the user's account or is specific to individual orders.
     - Can a user be a loyalty member for one purchase and not another? This clarification is essential for accurately measuring program performance.
+      
 - **Sales and Marketing Channels**: Direct and email channels are top drivers of sales, yet the link between these channels and the loyalty program is uncertain due to deterministic channel-account-order relationships.
     - **Attribution of Purchases to Channels**: Ideally, each purchase would be attributed to the marketing channel that directly led to it, rather than defaulting all future purchases to the initial channel. However, the current dataset reflects the entry point at account creation, not at individual purchase. Despite this, the data provides insights on loyalty membership by channel:
         - **Email Channel**: Highest loyalty membership rate at 58%.
         - **Direct Channel**: Largest loyalty membership count, with 32,906 members (72% of all loyalty members).
     - These metrics could inform strategic channel emphasis to boost loyalty engagement.
+ 
 - **Unmatched Customer Records**: Approximately 27k (25%) of transactions have `customer_id`s not present in the `customers` table. This discrepancy suggests missing data or data entry errors, impacting SQL queries and resulting in NULLs when joining on `customer_id`.
     - This issue arises from the segmented structure of SQL tables (`orders`, `customers`, `geo_lookup`, `order_status`). However, in Excel, where all data resides in a single table, this issue doesn't occur.
 
